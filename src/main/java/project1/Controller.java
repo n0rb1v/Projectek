@@ -29,11 +29,10 @@ public class Controller {
                         "| 4. Teruletek                  | 8. Kilepes                    |\n"+
                         "-----------------------------------------------------------------\n"+
                         "Menupont:");
-        return Integer.parseInt(scanner.nextLine());
+        return Integer.parseInt(stringIN());
     }
 
-    private void runMenu() {
-        boolean run = true;
+    private void runMenu(boolean run) {
         while (run == true){
             switch (printMenu()){
                 case 1:
@@ -60,7 +59,6 @@ public class Controller {
                 case 8:
                     run = false;
             }
-
         }
     }
 
@@ -71,7 +69,7 @@ public class Controller {
     public static void main(String[] args) {
         Controller c = new Controller();
         c.readOffice();
-        c.runMenu();
+        c.runMenu(true);
 
     }
 }

@@ -17,8 +17,8 @@ public class Office {
     }
 
     public void printNamesReverse() {
-        for (int i = meetingRooms.size(); i < 1; i++) {
-            System.out.println(meetingRooms.get(i).getName());
+        for (int i = meetingRooms.size(); i != 0; i--) {
+            System.out.println(meetingRooms.get(i-1).getName());
         }
     }
 
@@ -52,7 +52,7 @@ public class Office {
 
     public void printAreasLargerThan(int area) {
         for (MeetingRoom item : meetingRooms) {
-            if (item.getArea() > area) {
+            if (item.getArea() >= area) {
                 System.out.println(item.getName() + " " + item.getWidth() + " " + item.getLenght() + " " + item.getArea());
             }
         }
