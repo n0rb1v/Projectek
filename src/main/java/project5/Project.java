@@ -10,4 +10,5 @@ public class Project {
     public String getName() {
         return name;
     }
+
 }

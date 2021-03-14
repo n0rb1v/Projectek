@@ -70,8 +70,7 @@ public class CompanyTest {
 
 
         assertEquals(10L, company.calculateProjectByNameYearMonth("John Connor", 2013, 1).get(0).getTime());
-        assertEquals(0L, company.calculateProjectByNameYearMonth("John Connor", 2013, 1).get(1).getTime());
-        assertEquals(4L, company.calculateProjectByNameYearMonth("John Connor", 2013, 1).get(3).getTime());
+        assertEquals(4L, company.calculateProjectByNameYearMonth("John Connor", 2013, 1).get(1).getTime());
     }
 
     @Test

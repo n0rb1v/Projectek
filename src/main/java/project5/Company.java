@@ -1,17 +1,21 @@
 package project5;
 
 import java.io.*;
+import java.nio.file.Files;
 import java.nio.file.Path;
+import java.sql.SQLOutput;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Company {
     private InputStream employeesFile;
     private InputStream projectsFile;
     private List<Employee> employees;
     private List<Project> projects;
-    private List<TimeSheetItem> timeSheetItems;
+    private List<TimeSheetItem> timeSheetItems = new ArrayList<>();
 
     public Company(InputStream employeesFile, InputStream projectsFile) {
         this.employeesFile = employeesFile;
@@ -23,11 +27,46 @@ public class Company {
     }
 
     public List<ReportLine> calculateProjectByNameYearMonth(String employeeName, int year, int month) {
-        return null;
+        try {
+            if (!getEmployees().contains(new Employee(employeeName.split(" ")[0], employeeName.split(" ")[1]))) {
+                throw new IllegalArgumentException("hibas nev");
+            }
+        }catch (ArrayIndexOutOfBoundsException e){
+            throw new IllegalArgumentException("hibas nev");
+        }
+        List<ReportLine> result = new ArrayList<>();
+        Map<String, Long> temp = new HashMap<>();
+        for (TimeSheetItem item : timeSheetItems) {
+            if (item.getEmployee().getName().equals(employeeName) &
+                    item.getBeginDate().getYear() == year &
+                    item.getBeginDate().getMonthValue() == month) {
+                String key = item.getProject().getName();
+                if (!temp.containsKey(key)) {
+                    temp.put(key, 0L);
+                }
+                temp.put(key, temp.get(key) + item.hoursBetweenDates());
+            }
+        }
+        for (String item : temp.keySet()) {
+            result.add(new ReportLine(new Project(item), temp.get(item)));
+        }
+        return result;
     }
 
     public void printToFile(String employeeName, int year, int month, Path file) {
-
+        List<ReportLine> result = calculateProjectByNameYearMonth(employeeName, year, month);
+        int sum = 0;
+        StringBuilder sb = new StringBuilder();
+        for (ReportLine item : result) {
+            sb.append(item.getProject().getName() + "\t" + item.getTime() + "\n");
+            sum += item.getTime();
+        }
+        String body = employeeName + "\t" + year + "-" + String.format("%02d",month)+ "\t" + sum + "\n" + sb.toString();
+        try (BufferedWriter bw = Files.newBufferedWriter(file)) {
+            bw.write(body);
+        } catch (IOException e) {
+            throw new IllegalStateException("file error");
+        }
     }
 
     private List<Employee> getEmployeesFile() {

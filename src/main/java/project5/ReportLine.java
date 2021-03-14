@@ -1,5 +1,7 @@
 package project5;
 
+import java.util.Objects;
+
 public class ReportLine {
     private Project project;
     private long time;
@@ -16,4 +18,5 @@ public class ReportLine {
     public long getTime() {
         return time;
     }
+
 }
