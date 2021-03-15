@@ -1,4 +1,4 @@
-package project4;
+package sqlfeladat;
 
 public enum ActivityType {
     BIKING, HIKING, RUNNING, BASKETBALL

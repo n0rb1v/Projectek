@@ -1,4 +1,4 @@
-package project4;
+package sqlfeladat;
 
 import java.time.LocalDate;
 

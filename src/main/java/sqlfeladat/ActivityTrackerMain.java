@@ -1,4 +1,4 @@
-package project4;
+package sqlfeladat;
 
 import org.flywaydb.core.Flyway;
 import org.mariadb.jdbc.MariaDbDataSource;
