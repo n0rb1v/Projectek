@@ -19,6 +19,21 @@ CREATE TABLE vaccinations (
 	PRIMARY KEY (id),
     FOREIGN KEY (citizen_id) REFERENCES citizens(id) );
 
+CREATE TABLE cities (
+  `IRSZ` varchar(10) NOT NULL,
+  `Település` varchar(100) NOT NULL,
+  `Településrész` varchar(100) DEFAULT NULL);
+
+INSERT INTO `cities` (`IRSZ`, `Település`, `Településrész`) VALUES
+	('2000', 'Szentendre', ''),
+	('2009', 'Pilisszentlászló', ''),
+	('2011', 'Budakalász', ''),
+	('2013', 'Pomáz', ''),
+	('2014', 'Csobánka', ''),
+	('2015', 'Szigetmonostor', ''),
+	('2016', 'Leányfalu', ''),
+	('2017', 'Pócsmegyer', '');
+
 INSERT INTO `citizens` VALUES (1, 'Taryl Chasier', '7522', 86, 'dchasier0@comcast.net', '123456788', 0, NULL);
 INSERT INTO `citizens` VALUES (2, 'Sunny Stanlake', '5475', 86, 'sstanlake1@etsy.com', '123456795', 0, NULL);
 INSERT INTO `citizens` VALUES (3, 'Kristofor Brigginshaw', '5515', 75, 'kbrigginshaw2@patch.com', '123456805', 0, NULL);
